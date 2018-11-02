@@ -24,14 +24,16 @@ module.exports = fig => {
     });
 
   const toString = (val, opt) => {
-    if (val === null) {
+    if (!val) {
       return Promise.resolve('');
-    } else if (opt.serialize) {
+    }
+
+    if (opt.serialize) {
       return Promise.resolve(opt.serialize(val));
     } else if (_.isObject(val)) {
       return Promise.resolve(JSON.stringify(val));
     } else {
-      return Promise.reject(new Error('Must be Object or Null'));
+      return Promise.resolve(val);
     }
   };
 
